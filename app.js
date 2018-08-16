@@ -11,11 +11,11 @@ var command = process.argv[2];
 if (command === "add") {
   notes.addNote(argv.title, argv.body);
 } else if (command === "list") {
-  console.log("Listing all notes");
+  notes.getAll();
 } else if (command === "remove") {
-  console.log("Removing note");
+  notes.removeNote(argv.title);
 } else if (command === "read") {
-  console.log("Reading note");
+  notes.getNote(argv.title);
 } else {
-  console.log("Comman not recognised");
+  console.log("Command not recognised");
 }
