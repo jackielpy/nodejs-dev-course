@@ -1,7 +1,13 @@
 console.log("Starting notes.js");
 
+const fs = require("fs");
+
 var addNote = (title, body) => {
-  console.log("Adding note:", title, body);
+  var notes = getAll();
+  var note = { title, body };
+  notes.push(note);
+
+  fs.writeFileSync("notes-data.json", JSON.stringify(notes));
 };
 
 var removeNote = title => {
@@ -9,7 +15,14 @@ var removeNote = title => {
 };
 
 var getAll = () => {
-  console.log("Get all notes");
+  var notes = [];
+  try {
+    var notesString = fs.readFileSync("notes-data.json");
+    notes = JSON.parse(notesString);
+  } catch (e) {
+    console.log(e);
+  }
+  return notes;
 };
 
 var getNote = title => {
